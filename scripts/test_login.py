@@ -24,3 +24,6 @@ class TestLogin:
         self.page.login_and_sign_up_page.input_password(password)
         self.page.login_and_sign_up_page.click_login()
         assert self.page.login_and_sign_up_page.is_login(expect)
+
+    def test_login2(self):
+        print(2)
