@@ -1,0 +1,29 @@
+test_login:
+  test_login_001:
+    phone: "13800138006"
+    password: "123456"
+    expect: "登录成功"
+  test_login_002:
+    phone: "13800138006"
+    password: "123456123"
+    expect: "密码错误"
+  test_login_003:
+    phone: "13800138006 "
+    password: "123456"
+    expect: "登录成功"
+  test_login_004:
+    phone: " 13800138006"
+    password: "123456"
+    expect: "账号不存在"
+  test_login_005:
+    phone: "138001380061"
+    password: "123456"
+    expect: "账号不存在"
+  test_login_006:
+    phone: "1380013800"
+    password: "123456"
+    expect: "账号不存在"
+  test_login_009:
+    phone: "12300138006"
+    password: "123456"
+    expect: "账号不存在"
