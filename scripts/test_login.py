@@ -17,3 +17,6 @@ class TestLogin:
     def test_login(self):
         self.page.home.click_mine()
         self.page.mine.click_login_and_sign_up()
+        self.page.login_and_sign_up_page.input_phone("13800138006")
+        self.page.login_and_sign_up_page.input_password("123456")
+        self.page.login_and_sign_up_page.click_login()
