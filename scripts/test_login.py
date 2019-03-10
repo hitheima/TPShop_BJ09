@@ -25,5 +25,5 @@ class TestLogin:
         self.page.login_and_sign_up_page.click_login()
         assert self.page.login_and_sign_up_page.is_login(expect)
 
-    def test_login3(self):
-        print(3)
+    def test_login4(self):
+        print(4)
