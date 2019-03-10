@@ -8,7 +8,7 @@ class BaseAction:
     def __init__(self, driver):
         self.driver = driver
 
-    def find_element(self, feature, timeout=10, poll=1):
+    def find_element(self, feature, timeout=10.0, poll=1.0):
         """
         根据元素的从特征（元组），定位对应的元素
         :param feature: 特征
@@ -24,7 +24,7 @@ class BaseAction:
         element = WebDriverWait(self.driver, timeout, poll).until(lambda x: x.find_element(by, value))
         return element
 
-    def find_elements(self, feature, timeout=10, poll=1):
+    def find_elements(self, feature, timeout=10.0, poll=1.0):
         """
         根据元素的从特征（元组），定位符合特征条件的多个元素
         :param feature: 特征
@@ -36,7 +36,7 @@ class BaseAction:
         element = WebDriverWait(self.driver, timeout, poll).until(lambda x: x.find_elements(by, value))
         return element
 
-    def click(self, feature, timeout=10, poll=1):
+    def click(self, feature, timeout=10.0, poll=1.0):
         """
         根据传进来的特征，去找对应的元素，并且点击
         :param feature: 特征
@@ -45,7 +45,7 @@ class BaseAction:
         """
         self.find_element(feature, timeout, poll).click()
 
-    def input(self, feature, text, timeout=10, poll=1):
+    def input(self, feature, text, timeout=10.0, poll=1.0):
         """
         根据传进来的特征，去找对应的元素，并且输入文字
         :param feature: 特征
@@ -55,7 +55,7 @@ class BaseAction:
         """
         self.find_element(feature, timeout, poll).send_keys(text)
 
-    def clear(self, feature, timeout=10, poll=1):
+    def clear(self, feature, timeout=10.0, poll=1.0):
         """
         根据传进来的特征，去找对应的元素，并且清空
         :param feature: 特征
@@ -71,4 +71,4 @@ class BaseAction:
         :return: 全部内容
         """
         feature = By.XPATH, "//*[contains(@text,'" + content + "')]"
-        return self.find_element(feature).text
+        return self.find_element(feature, 5, 0.1).text
