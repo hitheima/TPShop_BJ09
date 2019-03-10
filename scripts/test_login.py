@@ -20,3 +20,4 @@ class TestLogin:
         self.page.login_and_sign_up_page.input_phone("13800138006")
         self.page.login_and_sign_up_page.input_password("123456")
         self.page.login_and_sign_up_page.click_login()
+        assert self.page.login_and_sign_up_page.is_login("登录成功")

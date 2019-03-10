@@ -19,3 +19,10 @@ class LoginAndSignUpPage(BaseAction):
 
     def click_login(self):
         self.click(self.login_button)
+
+    def is_login(self, content):
+        try:
+            self.find_toast(content)
+            return True
+        except Exception:
+            return False

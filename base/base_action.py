@@ -1,3 +1,4 @@
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 
 
@@ -63,6 +64,11 @@ class BaseAction:
         """
         self.find_element(feature, timeout, poll).clear()
 
-    # def xxxx(self):
-    #     self.driver.find_element_by_xxx("xxx")
-    #     WebDriverWait(self.driver, 10, 1).until(lambda x: x.find_element_by_xxx("xxx"))
+    def find_toast(self, content):
+        """
+        根据部分toast内容，获取全部的toast内容
+        :param content: 部分内容
+        :return: 全部内容
+        """
+        feature = By.XPATH, "//*[contains(@text,'" + content + "')]"
+        return self.find_element(feature).text

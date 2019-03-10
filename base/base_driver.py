@@ -17,6 +17,8 @@ def init_driver():
     desired_caps['appActivity'] = '.SPMainActivity'
     # 不要重置应用
     # desired_caps['noReset'] = True
+    # toast
+    desired_caps['automationName'] = 'Uiautomator2'
 
     # 声明我们的driver对象
     return webdriver.Remote('http://127.0.0.1:4723/wd/hub', desired_caps)
