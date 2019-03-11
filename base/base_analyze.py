@@ -9,5 +9,6 @@ def analyze_file(file_name, key_name):
         data = yaml.load(f)
         data_list = list()
         for i in data[key_name].values():
-            data_list.append(list(i.values()))
+            # data_list.append(list(i.values))
+            data_list.append(i)
         return data_list
