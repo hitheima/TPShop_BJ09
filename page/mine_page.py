@@ -30,17 +30,7 @@ class MinePage(BaseAction):
     @allure.step(title='我的页面 - 点击收货地址')
     def click_address(self):
         # 找收货地址，如果没有就滑动
-        while True:
-
-            source = self.driver.page_source
-            try:
-                self.find_element(self.address_button).click()
-                break
-            except Exception:
-                self.scroll_page_one_time()
-                if source == self.driver.page_source:
-                    # 到底了
-                    raise Exception("滑动到底")
+        self.scroll_find_element(self.address_button).click()
 
     # 只要调用，返回title bar的标题
     def get_title_bar_text(self):

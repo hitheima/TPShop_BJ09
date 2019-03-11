@@ -104,3 +104,20 @@ class BaseAction:
             self.driver.swipe(right_x, right_y, left_x, left_y)
         else:
             raise Exception("请传入正确的参数 up/down/left/right")
+
+    def scroll_find_element(self, feature, dir="down"):
+        """
+        边滑边找，如果找到则返回，如果没有找到则抛异常
+        :param feature: 元素的特征
+        :return: 元素
+        """
+        while True:
+
+            source = self.driver.page_source
+            try:
+                return self.find_element(feature)
+            except Exception:
+                self.scroll_page_one_time(dir)
+                if source == self.driver.page_source:
+                    # 到底了
+                    raise Exception("滑动到底")
