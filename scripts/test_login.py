@@ -40,7 +40,7 @@ class TestLogin:
         self.page.login_and_sign_up_page.click_login()
         assert self.page.login_and_sign_up_page.is_login_success(expect)
 
-    @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
+    # @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
     @pytest.mark.parametrize("args", analyze_file("login_data", "test_login_miss_part"))
     def test_login_miss_part(self, args):
         phone = args["phone"]
