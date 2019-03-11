@@ -32,7 +32,7 @@ class LoginAndSignUpPage(BaseAction):
     def click_show_password(self):
         self.click(self.show_password_button)
 
-    def is_login(self, content):
+    def is_login_success(self, content):
         """
         根据toast的部分内容，判断是否提示登录成功
         :param content:

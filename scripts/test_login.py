@@ -33,7 +33,7 @@ class TestLogin:
     #     self.page.login_and_sign_up_page.input_phone(phone)
     #     self.page.login_and_sign_up_page.input_password(password)
     #     self.page.login_and_sign_up_page.click_login()
-    #     assert self.page.login_and_sign_up_page.is_login(expect)
+    #     assert self.page.login_and_sign_up_page.is_login_success(expect)
 
     # @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
     # def test_login_miss_part(self, phone, password):
@@ -57,24 +57,24 @@ class TestLogin:
         # else:
         #     assert False
 
-    @pytest.mark.parametrize("password", [random_password(), random_password()])
-    def test_show_password(self, password):
-        # 首页点击 我的
-        self.page.home.click_mine()
-        # 我的点击 登录注册
-        self.page.mine.click_login_and_sign_up()
-        # 登录注册输入 密码
-        self.page.login_and_sign_up_page.input_password(password)
-
-        # 判断 输入的密码找不到
-        assert not self.page.login_and_sign_up_page.is_password_exist(password)
-
-        # 点击显示密码按钮
-        self.page.login_and_sign_up_page.click_show_password()
-        # 截图，上传到报告
-        allure.attach("截图：", self.driver.get_screenshot_as_png(), allure.attach_type.PNG)
-        # 找到 输入的密码
-        assert self.page.login_and_sign_up_page.is_password_exist(password)
+    # @pytest.mark.parametrize("password", [random_password(), random_password()])
+    # def test_show_password(self, password):
+    #     # 首页点击 我的
+    #     self.page.home.click_mine()
+    #     # 我的点击 登录注册
+    #     self.page.mine.click_login_and_sign_up()
+    #     # 登录注册输入 密码
+    #     self.page.login_and_sign_up_page.input_password(password)
+    #
+    #     # 判断 输入的密码找不到
+    #     assert not self.page.login_and_sign_up_page.is_password_exist(password)
+    #
+    #     # 点击显示密码按钮
+    #     self.page.login_and_sign_up_page.click_show_password()
+    #     # 截图，上传到报告
+    #     allure.attach("截图：", self.driver.get_screenshot_as_png(), allure.attach_type.PNG)
+    #     # 找到 输入的密码
+    #     assert self.page.login_and_sign_up_page.is_password_exist(password)
 
         # if self.page.login_and_sign_up_page.is_password_exist(password):
         #     assert False
