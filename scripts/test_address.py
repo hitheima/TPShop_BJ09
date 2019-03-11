@@ -23,9 +23,12 @@ class TestAddress:
 
         # 1.3 判断是否登录
         if not self.page.mine.is_login():
-            print("没有登录。准备登录")
-        else:
-            print("已经登录")
+            # 如果已经登录，此时页面会来到登录页面，直接输入用户名和密码即可
+            self.page.login_and_sign_up_page.input_phone("13800138006")
+            self.page.login_and_sign_up_page.input_password("123456")
+            self.page.login_and_sign_up_page.click_login()
+            # 登录成功后会自动的回到，"我的"页面
+            assert self.page.login_and_sign_up_page.is_login_success("登录成功")
 
         # 2. 点击收货地址
 
