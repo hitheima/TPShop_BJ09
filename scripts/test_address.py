@@ -31,6 +31,8 @@ class TestAddress:
             assert self.page.login_and_sign_up_page.is_login_success("登录成功")
 
         # 2. 点击收货地址
+        self.page.mine.click_address()
+
 
         # 3。 xxxxx
 

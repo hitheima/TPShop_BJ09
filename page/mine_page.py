@@ -16,6 +16,9 @@ class MinePage(BaseAction):
     # 导航栏的特征
     title_bar = By.ID, "com.tpshop.malls:id/titlebar_title_txtv"
 
+    # 收货地址
+    address_button = By.XPATH, "//*[@text='收货地址1']"
+
     @allure.step(title='我的页面 - 点击登录/注册')
     def click_login_and_sign_up(self):
         self.click(self.login_and_sign_up_button)
@@ -23,6 +26,41 @@ class MinePage(BaseAction):
     @allure.step(title='我的页面 - 点击设置')
     def click_setting(self):
         self.click(self.setting_button)
+
+    @allure.step(title='我的页面 - 点击收货地址')
+    def click_address(self):
+
+
+
+
+        # 找收货地址，如果没有就滑动
+        while True:
+
+            source = self.driver.page_source
+            try:
+                self.find_element(self.address_button).click()
+                break
+            except Exception:
+                # 根据屏幕分辨率，从4/3 滑动到 4/1
+                window_size = self.driver.get_window_size()
+                width = window_size["width"]
+                height = window_size["height"]
+
+                start_x = width * 0.5
+                start_y = height * 0.75
+                end_x = start_x
+                end_y = height * 0.25
+
+                # 滑动
+                self.driver.swipe(start_x, start_y, end_x, end_y, 3000)
+                if source == self.driver.page_source:
+                    # 到底了
+                    raise Exception("滑动到底")
+
+        
+
+
+
 
     # 只要调用，返回title bar的标题
     def get_title_bar_text(self):
