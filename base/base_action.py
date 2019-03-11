@@ -72,3 +72,35 @@ class BaseAction:
         """
         feature = By.XPATH, "//*[contains(@text,'" + content + "')]"
         return self.find_element(feature, 5, 0.1).text
+
+    def scroll_page_one_time(self, dir="down"):
+        """
+        滑动 半屏 从 4/3 到 4/1
+        :param dir: 反向
+            up: 从上往下
+            down: 从下往上
+            left: 从左往右
+            right: 从右往左
+        """
+        window_size = self.driver.get_window_size()
+        width = window_size["width"]
+        height = window_size["height"]
+        top_x = width * 0.5
+        top_y = height * 0.25
+        bottom_x = top_x
+        bottom_y = width * 0.75
+        left_x = width * 0.25
+        left_y = height * 0.5
+        right_x = width * 0.75
+        right_y = left_y
+
+        if dir == "down":
+            self.driver.swipe(bottom_x, bottom_y, top_x, top_y)
+        elif dir == "up":
+            self.driver.swipe(top_x, top_y, bottom_x, bottom_y)
+        elif dir == "left":
+            self.driver.swipe(left_x, left_y, right_x, right_y)
+        elif dir == "right":
+            self.driver.swipe(right_x, right_y, left_x, left_y)
+        else:
+            raise Exception("请传入正确的参数 up/down/left/right")
