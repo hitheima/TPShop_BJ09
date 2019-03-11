@@ -16,14 +16,35 @@ class TestLogin:
         time.sleep(3)
         self.driver.quit()
 
-    @pytest.mark.parametrize(("phone", "password", "expect"), analyze_file("login_data", "test_login"))
-    def test_login(self, phone, password, expect):
-        self.page.home.click_mine()
-        self.page.mine.click_login_and_sign_up()
-        self.page.login_and_sign_up_page.input_phone(phone)
-        self.page.login_and_sign_up_page.input_password(password)
-        self.page.login_and_sign_up_page.click_login()
-        assert self.page.login_and_sign_up_page.is_login(expect)
+    # @pytest.mark.parametrize(("phone", "password", "expect"), analyze_file("login_data", "test_login"))
+    # def test_login(self, phone, password, expect):
+    #     self.page.home.click_mine()
+    #     self.page.mine.click_login_and_sign_up()
+    #     self.page.login_and_sign_up_page.input_phone(phone)
+    #     self.page.login_and_sign_up_page.input_password(password)
+    #     self.page.login_and_sign_up_page.click_login()
+    #     assert self.page.login_and_sign_up_page.is_login(expect)
 
-    def test_login4(self):
-        print(4)
+    @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
+    def test_login_miss_part(self, phone, password):
+        # 首页点击 我的
+        self.page.home.click_mine()
+        # 我的点击 登录注册
+        self.page.mine.click_login_and_sign_up()
+        # 登录注册输入 手机号
+        self.page.login_and_sign_up_page.input_phone(phone)
+        # 登录注册输入 密码
+        self.page.login_and_sign_up_page.input_password(password)
+        # 定位登录按钮 是否可用
+
+        assert not self.page.login_and_sign_up_page.is_login_enabled()
+
+        # assert not self.page.login_and_sign_up_page.is_login_enabled()
+
+        #
+        # if self.page.login_and_sign_up_page.is_login_enabled() == False:
+        #     assert True
+        # else:
+        #     assert False
+
+

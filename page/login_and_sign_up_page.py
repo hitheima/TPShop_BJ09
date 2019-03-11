@@ -10,6 +10,7 @@ class LoginAndSignUpPage(BaseAction):
 
     password_edit_text = By.ID, "com.tpshop.malls:id/edit_password"
 
+    # 登录按钮
     login_button = By.ID, "com.tpshop.malls:id/btn_login"
 
     @allure.step(title='登录注册 - 输入电话')
@@ -35,3 +36,19 @@ class LoginAndSignUpPage(BaseAction):
             return True
         except Exception:
             return False
+
+    def is_login_enabled(self):
+        """
+        判断 登录按钮中的 enabled 属性值 是不是 可用的
+        true 表示可用
+        false 表示不可用
+        :return: 是否可用
+        """
+        return self.find_element(self.login_button).get_attribute("enabled") == "true"
+
+        # if self.find_element(self.login_button).get_attribute("enabled") == "true":
+        #     return True
+        # else:
+        #     return False
+
+
