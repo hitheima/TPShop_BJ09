@@ -1,5 +1,7 @@
 import random
 import time
+
+import allure
 import pytest
 
 from base.base_analyze import analyze_file
@@ -65,11 +67,24 @@ class TestLogin:
         self.page.login_and_sign_up_page.input_password(password)
 
         # 判断 输入的密码找不到
-        if not self.page.login_and_sign_up_page.is_password_exist(password):
-            # 点击显示密码按钮
-            self.page.login_and_sign_up_page.click_show_password()
-            # 找到 输入的密码
-            assert self.page.login_and_sign_up_page.is_password_exist(password)
+        assert not self.page.login_and_sign_up_page.is_password_exist(password)
+
+        # 点击显示密码按钮
+        self.page.login_and_sign_up_page.click_show_password()
+        # 截图，上传到报告
+        allure.attach("截图：", self.driver.get_screenshot_as_png(), allure.attach_type.PNG)
+        # 找到 输入的密码
+        assert self.page.login_and_sign_up_page.is_password_exist(password)
+
+        # if self.page.login_and_sign_up_page.is_password_exist(password):
+        #     assert False
+        # else:
+        #     # 点击显示密码按钮
+        #     self.page.login_and_sign_up_page.click_show_password()
+        #     # 截图，上传到报告
+        #     allure.attach("截图：", self.driver.get_screenshot_as_png(), allure.attach_type.PNG)
+        #     # 找到 输入的密码
+        #     assert self.page.login_and_sign_up_page.is_password_exist(password)
 
 
 
