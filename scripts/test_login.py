@@ -1,9 +1,17 @@
+import random
 import time
 import pytest
 
 from base.base_analyze import analyze_file
 from base.base_driver import init_driver
 from page.page import Page
+
+
+def random_password():
+    password = ""
+    for i in range(8):
+        password += str(random.randint(0, 9))
+    return password
 
 
 class TestLogin:
@@ -25,19 +33,19 @@ class TestLogin:
     #     self.page.login_and_sign_up_page.click_login()
     #     assert self.page.login_and_sign_up_page.is_login(expect)
 
-    @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
-    def test_login_miss_part(self, phone, password):
-        # 首页点击 我的
-        self.page.home.click_mine()
-        # 我的点击 登录注册
-        self.page.mine.click_login_and_sign_up()
-        # 登录注册输入 手机号
-        self.page.login_and_sign_up_page.input_phone(phone)
-        # 登录注册输入 密码
-        self.page.login_and_sign_up_page.input_password(password)
-        # 定位登录按钮 是否可用
-
-        assert not self.page.login_and_sign_up_page.is_login_enabled()
+    # @pytest.mark.parametrize(("phone", "password"), analyze_file("login_data", "test_login_miss_part"))
+    # def test_login_miss_part(self, phone, password):
+    #     # 首页点击 我的
+    #     self.page.home.click_mine()
+    #     # 我的点击 登录注册
+    #     self.page.mine.click_login_and_sign_up()
+    #     # 登录注册输入 手机号
+    #     self.page.login_and_sign_up_page.input_phone(phone)
+    #     # 登录注册输入 密码
+    #     self.page.login_and_sign_up_page.input_password(password)
+    #     # 定位登录按钮 是否可用
+    #
+    #     assert not self.page.login_and_sign_up_page.is_login_enabled()
 
         # assert not self.page.login_and_sign_up_page.is_login_enabled()
 
@@ -46,5 +54,24 @@ class TestLogin:
         #     assert True
         # else:
         #     assert False
+
+    @pytest.mark.parametrize("password", [random_password(), random_password()])
+    def test_show_password(self, password):
+        # 首页点击 我的
+        self.page.home.click_mine()
+        # 我的点击 登录注册
+        self.page.mine.click_login_and_sign_up()
+        # 登录注册输入 密码
+        self.page.login_and_sign_up_page.input_password(password)
+
+        # 判断 输入的密码找不到
+        if not self.page.login_and_sign_up_page.is_password_exist(password):
+            # 点击显示密码按钮
+            self.page.login_and_sign_up_page.click_show_password()
+            # 找到 输入的密码
+            assert self.page.login_and_sign_up_page.is_password_exist(password)
+
+
+
 
 

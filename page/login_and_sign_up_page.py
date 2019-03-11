@@ -13,6 +13,9 @@ class LoginAndSignUpPage(BaseAction):
     # 登录按钮
     login_button = By.ID, "com.tpshop.malls:id/btn_login"
 
+    # 显示密码按钮
+    show_password_button = By.ID, "com.tpshop.malls:id/img_view_pwd"
+
     @allure.step(title='登录注册 - 输入电话')
     def input_phone(self, text):
         self.input(self.phone_edit_text, text)
@@ -24,6 +27,10 @@ class LoginAndSignUpPage(BaseAction):
     @allure.step(title='登录注册 - 点击登录')
     def click_login(self):
         self.click(self.login_button)
+
+    @allure.step(title='登录注册 - 点击显示密码')
+    def click_show_password(self):
+        self.click(self.show_password_button)
 
     def is_login(self, content):
         """
@@ -49,6 +56,20 @@ class LoginAndSignUpPage(BaseAction):
         # if self.find_element(self.login_button).get_attribute("enabled") == "true":
         #     return True
         # else:
+        #     return False
+
+    def is_password_exist(self, password):
+        """
+        根据传入的密码，判断是否和密码框上的密码一致
+        :param password: 传入的密码
+        :return: 是否一致
+        """
+        return self.find_element(self.password_edit_text).text == password
+
+        # try:
+        #     self.find_element((By.XPATH, "//*[@text='" + password + "']"))
+        #     return True
+        # except:
         #     return False
 
 
