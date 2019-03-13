@@ -17,7 +17,7 @@ class MinePage(BaseAction):
     title_bar = By.ID, "com.tpshop.malls:id/titlebar_title_txtv"
 
     # 收货地址
-    address_button = By.XPATH, "//*[@text='收货地址1']"
+    address_button = By.XPATH, "//*[@text='收货地址']"
 
     @allure.step(title='我的页面 - 点击登录/注册')
     def click_login_and_sign_up(self):
