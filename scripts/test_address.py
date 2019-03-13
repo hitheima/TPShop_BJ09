@@ -47,7 +47,17 @@ class TestAddress:
         self.page.address_info_page.input_address("二号楼 三单元 106")
 
         # 4.4 填写所在地区
+        self.page.address_info_page.click_region()
         # 4.4.1 选择省、市、区、街道
+        self.page.address_region_page.click_cities()
+        # 4.4.2 点击确定
+        self.page.address_region_page.click_commit()
+
+        # 4.5 保存收货地址
+        self.page.address_info_page.click_save_address_button()
+
+        # 断言，如果出现添加成功的toast那么就通过
+        assert self.page.address_info_page.is_save_success("添加成功")
 
 
 
