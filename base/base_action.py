@@ -88,7 +88,7 @@ class BaseAction:
         top_x = width * 0.5
         top_y = height * 0.25
         bottom_x = top_x
-        bottom_y = width * 0.75
+        bottom_y = height * 0.75
         left_x = width * 0.25
         left_y = height * 0.5
         right_x = width * 0.75
